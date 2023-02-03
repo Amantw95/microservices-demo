@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.employeeservice.model.Employee;
 import com.example.employeeservice.repository.EmployeeRepository;
+import static net.logstash.logback.argument.StructuredArguments.keyValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public Employee findById(@PathVariable("id") String id) {
-        LOGGER.info("Employee find: id={}", id);
+        LOGGER.info("Employee find: id={}", keyValue("id", id));
         return repository.findById(id).get();
     }
 
@@ -41,13 +42,13 @@ public class EmployeeController {
 
     @GetMapping("/department/{departmentId}")
     public List<Employee> findByDepartment(@PathVariable("departmentId") String departmentId) {
-        LOGGER.info("Employee find: departmentId={}", departmentId);
+        LOGGER.info("Employee find: departmentId={}", keyValue("departmentId", departmentId));
         return repository.findByDepartmentId(departmentId);
     }
 
     @GetMapping("/organization/{organizationId}")
     public List<Employee> findByOrganization(@PathVariable("organizationId") String organizationId) {
-        LOGGER.info("Employee find: organizationId={}", organizationId);
+        LOGGER.info("Employee find: organizationId={}", keyValue("organizationId", organizationId));
         return repository.findByOrganizationId(organizationId);
     }
 
